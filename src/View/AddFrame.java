@@ -24,6 +24,8 @@ public class AddFrame extends JFrame {
 //        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setLayout(null);
         this.setVisible(true);
+        this.setTitle("增加");
+
 
         JLabel mainName = new JLabel("主名字");
         JLabel indexName = new JLabel("副名字");

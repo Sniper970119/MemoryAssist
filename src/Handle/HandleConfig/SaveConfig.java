@@ -1,6 +1,7 @@
 package Handle.HandleConfig;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.*;
 
 /**
@@ -22,6 +23,7 @@ public class SaveConfig {
         while(iterator.hasNext()){
             String key = (String)iterator.next();
             String value = (String)map.get(key);
+//            System.out.println(key+value);
             properties.put(key,value);
 //            System.out.println(key+" "+value);
         }
@@ -33,9 +35,9 @@ public class SaveConfig {
     }
     public static void main(String[] args) throws Exception {
         Map map = new HashMap();
-        map.put("color","yellow");
-        map.put("debug","false");
-        map.put("id","1");
+        map.put("version","Beta 2");
+        map.put("update","true");
+        map.put("id","001");
         new SaveConfig(map);
     }
 }

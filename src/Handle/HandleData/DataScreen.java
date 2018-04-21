@@ -22,6 +22,9 @@ public class DataScreen {
         Iterator<Data> iterator = allData.iterator();
         while (iterator.hasNext()) {
             Data data = iterator.next();
+            if(data.getNextTime().isEqual(nowTime)){    //对今天的任务finish 重置
+                data.setFinish(false);
+            }
             if (data.isFinish()==false&&(data.getNextTime().isBefore(nowTime)||data.getNextTime().isEqual(nowTime))) {
                 data.setFinish(false);
                 screenData.add(data);

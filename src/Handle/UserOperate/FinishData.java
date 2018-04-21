@@ -25,15 +25,18 @@ public class FinishData {
         data.setFinish(true);   //更新完成状态
         data.setState(state);
 
+        System.out.println("switch");
+
         switch (state){         //更新下次的时间
             case 0:localDate = localDate.plusDays(666666);break;
-            case 2:localDate = localDate.plusDays(1);break;
+            case 2:System.out.println("case 2");localDate = localDate.plusDays(1);break;
             case 3:localDate = localDate.plusDays(2);break;
             case 4:localDate = localDate.plusDays(4);break;
             case 5:localDate = localDate.plusDays(7);break;
             case 6:localDate = localDate.plusDays(15);break;
             case 7:localDate = localDate.plusDays(15);break;
         }
+        System.out.println("break");
         data.setNextTime(localDate);
         return data;
     }

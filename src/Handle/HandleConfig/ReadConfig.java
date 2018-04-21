@@ -36,6 +36,9 @@ public class ReadConfig {
 //        String key = (String) it.next();
         String value = properties.getProperty("id");
         config.setId(value);
+        String version = properties.getProperty("version");
+        config.setVersion(version);
+        config.setUpdate(properties.getProperty("update"));
 
 //
 //        while (it.hasNext()) {
@@ -43,6 +46,7 @@ public class ReadConfig {
 //            String value = properties.getProperty(key);
 //            System.out.println(key + " " + value);
 //        }
+//        System.out.println(config.getId()+config.getVersion()+config.getUpdate());
     }
 
     public static void main(String[] args) throws Exception {
