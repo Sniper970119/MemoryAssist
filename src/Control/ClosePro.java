@@ -1,7 +1,10 @@
 package Control;
 
 import Data.Config;
+import Handle.HandleConfig.ReadConfig;
 import Handle.HandleConfig.SaveConfig;
+import Handle.HandleData.DataScreen;
+import Handle.HandleData.InitData;
 import Handle.HandleData.SaveData;
 
 import java.awt.event.WindowAdapter;
@@ -31,13 +34,17 @@ public class ClosePro extends WindowAdapter {
         Map map = new HashMap();
         // 可替换部分
         map.put("id",config.getId());
+        map.put("update","false");
+        map.put("version",config.getVersion());
         //
         new SaveConfig(map);
         System.out.println("window is closed !");
     }
 
     public static void main(String[] args) {
-        new StartPro();
+        new ReadConfig();
+        new InitData();
+        new DataScreen();
         new ClosePro();
     }
 }

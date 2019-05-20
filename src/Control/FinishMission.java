@@ -17,19 +17,21 @@ import java.util.Iterator;
  */
 public class FinishMission {
     public FinishMission(Data data){
+//        System.out.println("in"+data.toString());
         DataBuffer dataBuffer = DataBuffer.getDataBuffer();
         HashSet<Data> screenSet = dataBuffer.getScreenData();
         Iterator<Data> iterator = screenSet.iterator();
         while(iterator.hasNext()){
             Data temp = iterator.next();
             if (temp.equals(data)){
-//                System.out.println("in"+temp);
+                System.out.println("in temp:"+temp);
                 data = temp;
                 break;
             }
         }
-//        System.out.println(data.toString());
+        System.out.println("in data:"+data.toString());
         data = new FinishData().FinishData(data);
+        System.out.println("pass");
         new EditData(data);
 //        new SaveData();
 //        new InitData();

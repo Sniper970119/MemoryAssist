@@ -33,6 +33,7 @@ public class MainFrame extends JFrame {
         int width = (int) screensize.getWidth();
         int height = (int) screensize.getHeight();
         this.setBounds(width / 2 - 250, height / 2 - 250, 500, 500);
+        this.setTitle("MemoryAssist 1.0");
 //        this.setLocationRelativeTo(null);
         this.addWindowListener(new ClosePro()); //程序关闭前的资源保存与整理
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -53,12 +54,12 @@ public class MainFrame extends JFrame {
 
 
         JPanel panel = new JPanel();
-        panel.setBounds(20, 40, 400, 200);
+        panel.setBounds(5, 40, 500, 200);
         this.getContentPane().add(panel);
         panel.setLayout(null);
 
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(20, 40, 370, 170);
+        scrollPane.setBounds(5, 40, 470, 170);
         panel.add(scrollPane);
 
         JTable table = new JTable();
@@ -103,6 +104,11 @@ public class MainFrame extends JFrame {
                 }
             }
         });
+
+        table.getColumnModel().getColumn(0).setPreferredWidth(80);
+        table.getColumnModel().getColumn(1).setPreferredWidth(150);
+        table.getColumnModel().getColumn(2).setPreferredWidth(150);
+        table.getColumnModel().getColumn(3).setPreferredWidth(80);
 
         table.getColumnModel().getColumn(4).setCellEditor(
                 new ButtonEditor());

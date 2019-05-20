@@ -19,12 +19,14 @@ import Handle.UserOperate.RemoveData;
  */
 public class EditFrame extends JFrame {
     LocalDate temp = null;
+
     public EditFrame() {
         Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
         int width = (int) screensize.getWidth();
         int height = (int) screensize.getHeight();
         this.setBounds(width / 2 - 150, height / 2 - 100, 600, 300);
         this.setLocationRelativeTo(null);
+        this.setTitle("编辑");
 //        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setLayout(null);
         this.setVisible(true);
@@ -55,17 +57,17 @@ public class EditFrame extends JFrame {
         this.add(jTextFieldIndexName);
         this.add(jTextFieldState);
 
-        jLabelID.setBounds(10,10,50,30);
-        jLabelmainName.setBounds(10,50,50,30);
-        jLabelindexName.setBounds(170,50,50,30);
-        jLabelNextTime.setBounds(10,90,200,30);
-        jLabelState.setBounds(10,130,50,30);
-        jLabelHint.setBounds(10,160,500,30);
-        jLabelHint1.setBounds(10,175,500,30);
-        jTextFieldID.setBounds(60,10,100,30);
-        jTextFieldMainName.setBounds(60,50,100,30);
-        jTextFieldIndexName.setBounds(230,50,100,30);
-        jTextFieldState.setBounds(60,130,50,30);
+        jLabelID.setBounds(10, 10, 50, 30);
+        jLabelmainName.setBounds(10, 50, 50, 30);
+        jLabelindexName.setBounds(170, 50, 50, 30);
+        jLabelNextTime.setBounds(10, 90, 200, 30);
+        jLabelState.setBounds(10, 130, 50, 30);
+        jLabelHint.setBounds(10, 160, 500, 30);
+        jLabelHint1.setBounds(10, 175, 500, 30);
+        jTextFieldID.setBounds(60, 10, 100, 30);
+        jTextFieldMainName.setBounds(60, 50, 100, 30);
+        jTextFieldIndexName.setBounds(230, 50, 100, 30);
+        jTextFieldState.setBounds(60, 130, 50, 30);
 
         JButton save = new JButton("保存");
         JButton remove = new JButton("删除");
@@ -73,8 +75,10 @@ public class EditFrame extends JFrame {
         this.add(save);
         this.add(remove);
 
-        save.setBounds(50,210,100,30);
-        remove.setBounds(300,210,100,30);
+        save.setBounds(50, 210, 100, 30);
+        remove.setBounds(300, 210, 100, 30);
+
+        Boolean isNumber = false;
 
         jTextFieldMainName.addMouseListener(new MouseListener() {
             @Override
@@ -82,11 +86,17 @@ public class EditFrame extends JFrame {
                 String id = jTextFieldID.getText().trim();
                 Data data = new QueryMission().Query(id);
                 System.out.println(data);
-                temp = data.getNextTime();
-                jTextFieldMainName.setText(data.getMainName());
-                jTextFieldIndexName.setText(data.getIndexName());
-                jLabelNextTime.setText("下次复习时间: "+data.getNextTime());
-                jTextFieldState.setText(""+data.getState());
+                if (data==null) {
+                    JOptionPane.showMessageDialog(null,
+                            "请输入正确的任务id\n\r", "系统错误", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    temp = data.getNextTime();
+                    jTextFieldMainName.setText(data.getMainName());
+                    jTextFieldIndexName.setText(data.getIndexName());
+                    jLabelNextTime.setText("下次复习时间: " + data.getNextTime());
+                    jTextFieldState.setText("" + data.getState());
+                }
+
             }
 
             @Override
@@ -116,11 +126,25 @@ public class EditFrame extends JFrame {
                 String id = jTextFieldID.getText();
                 String main = jTextFieldMainName.getText();
                 String index = jTextFieldIndexName.getText();
-                int state = Integer.parseInt(jTextFieldState.getText());
-                Data data1 = new Data(id,main,index,temp,state);
-                new EditMission(data1);
-                JOptionPane.showMessageDialog(new JFrame().getContentPane(),
-                        "修改成功", "成功", JOptionPane.INFORMATION_MESSAGE);
+                String ststeString = jTextFieldState.getText();
+                if (ststeString.matches("[0-7]")){
+
+                    int state = Integer.parseInt(ststeString);
+                    Data data = new QueryMission().Query(id);
+                    if (data!=null) {
+                        Data data1 = new Data(id, main, index, temp, state);
+                        new EditMission(data1);
+                        JOptionPane.showMessageDialog(new JFrame().getContentPane(),
+                                "修改成功", "成功", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "请输入正确的任务id\n\r", "系统错误", JOptionPane.ERROR_MESSAGE);
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "请输入正确的状态\n\r", "系统错误", JOptionPane.ERROR_MESSAGE);
+
+                }
+
+
             }
         });
 
@@ -140,7 +164,8 @@ public class EditFrame extends JFrame {
         });
 
     }
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         new InitData();
         new EditFrame();
     }

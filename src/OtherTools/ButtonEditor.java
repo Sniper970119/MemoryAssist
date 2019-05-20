@@ -48,10 +48,10 @@ public class ButtonEditor extends AbstractCellEditor implements
                         JOptionPane.YES_NO_OPTION);
 
                 System.out.println(num);
-                new FinishMission(new Data(num));
-//                if(res ==  JOptionPane.YES_OPTION){
-//                    num++;
-//                }
+                if(res ==  JOptionPane.YES_OPTION){
+                    new FinishMission(new Data(num));
+
+                }
                 //stopped!!!!
                 fireEditingStopped();
 
